@@ -1,0 +1,9 @@
+<form name="myform" class="form-signin">
+   <h2 class="form-signin-heading">Please sign in</h2>
+   <label name='input' class="sr-only" >Username</label>
+   <input type="text" id="inputUsrname" class="form-control" placeholder="Username" autofocus=""  ng-model="username" required> 
+   <label for="inputPassword" class="sr-only">Password</label>
+   <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="password"  required>
+   <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="myform.$valid && callData()">Sign in</button>
+</form>
+<p id="errorMsg" style="display:none; color:red">Wrong username or password </p>
