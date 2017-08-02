@@ -16,7 +16,15 @@ function config($stateProvider,$interpolateProvider, $urlRouterProvider,$locatio
         .state('home.switchs',{
             url: '/switchs',
             templateUrl: 'views/switchs.html',
-            controller: 'signinCtrl',
+            controller: 'switchsCtrl',
+        })
+        .state('home.switchDetail', {
+            url: '/switchDetail/:selectedSwitch',
+            templateUrl: 'views/switchDetail.html',
+            controller: 'switchDetailCtrl',
+            params: {
+                selectedSwitch: null
+            }
         })
 
         $urlRouterProvider.otherwise('signin');
@@ -31,12 +39,10 @@ angular
     $rootScope.$on('$stateChangeStart', function (event, next, current) {
 
         if (!Auth.isLoggedIn()) {
-            console.log('DENY');
             //event.preventDefault();
             $location.path('/signin');
         }
         else {  
-            console.log('ALLOW');
             $location.path('/home');
         }
     });

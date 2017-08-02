@@ -12,5 +12,4 @@ return{
 }
 angular
     .module('myApp')
-    // .factory('httpInterceptorFactory', httpInterceptorFactory)
     .factory('Auth', Auth)

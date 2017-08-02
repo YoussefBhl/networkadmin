@@ -45,5 +45,36 @@ class AuthenticateUser(Resource):
 api.add_resource(AuthenticateUser, '/AuthenticateUser')
 
 
+class switchsList(Resource):
+    def get(self):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM switchs ")
+            data = cursor.fetchall()
+            print (data)
+            if (len(data) > 0):
+                return jsonify(data)
+            else:
+                return {'status': 100, 'message': 'Authentication failure'}
+
+        except Exception as e:
+            return {'error': str(e)}
+api.add_resource(switchsList, '/switchsList')
+'''
+@app.route('/switchsList',methods=['POST'])
+def Authenticate():
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM switchs ")
+    data = cursor.fetchall()
+    print (data)
+    if (len(data) > 0):
+        return {'status': 200, 'UserId': str(data[0][0])}
+    else:
+        return {'status': 100, 'message': 'Authentication failure'}
+        '''
+
+
 if __name__ == '__main__':
     app.run(debug=True)
