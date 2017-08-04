@@ -14,11 +14,13 @@ function signinCtrl($http, $scope, Auth) {
                 }
             })
             .then(function (resp) {
+                console.log(resp.data.status)
                 if (resp.data.status != 100) {
-                    Auth.setUser(resp.data);
-                    if (!Auth.isLoggedIn()) {
-                        document.getElementById("errorMsg").style.display = "block";
-                    }
+                    Auth.setUser(resp.data);   
+                }
+                else
+                {
+                    document.getElementById("errorMsg").style.display = "block";
                 }
             }, function (error) {
                 alert(error);

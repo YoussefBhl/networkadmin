@@ -2,9 +2,10 @@ from flask import Flask ,request,jsonify
 from flask_restful import Resource, Api,reqparse
 from flask.ext.cors import CORS
 from flask.ext.mysql import MySQL
+from  collect_data import perse_results, try_to_connect
 mysql = MySQL()
 # MySQL configurations
-
+selectedSwitchID = -1
 
 app = Flask(__name__)
 api = Api(app)
@@ -52,28 +53,51 @@ class switchsList(Resource):
             cursor = conn.cursor()
             cursor.execute("SELECT * FROM switchs ")
             data = cursor.fetchall()
-            print (data)
-            if (len(data) > 0):
-                return jsonify(data)
-            else:
-                return {'status': 100, 'message': 'Authentication failure'}
+            final_data = []
+            for switch in data:
+                rslt = try_to_connect(switch[2],switch[3],switch[4])
+                final_data.append(rslt)
+            return jsonify(data,final_data)
 
         except Exception as e:
             return {'error': str(e)}
 api.add_resource(switchsList, '/switchsList')
-'''
-@app.route('/switchsList',methods=['POST'])
-def Authenticate():
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM switchs ")
-    data = cursor.fetchall()
-    print (data)
-    if (len(data) > 0):
-        return {'status': 200, 'UserId': str(data[0][0])}
-    else:
-        return {'status': 100, 'message': 'Authentication failure'}
-        '''
+
+class switchInfo(Resource):
+    def get(self):
+        global selectedSwitchID
+        try:
+
+            '''if (len(data) > 0):
+                return jsonify(data)
+            else:
+                return {'status': 100, 'message': 'Authentication failure'}'''
+
+        except Exception as e:
+            return {'error': str(e)}
+api.add_resource(switchInfo, '/switchInfo')
+
+class selectedSwitch(Resource):
+    def post(self):
+        global selectedSwitchID
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument('ID', type=str)
+            args = parser.parse_args()
+            _ID = args['ID']
+            selectedSwitchID = _ID
+            file_ = open("show_connected_int.txt",'r')
+            interfaces = perse_results(file_.read(),"interfaces.textfsm",'inter')
+            file_.close()
+            file_ = open("show_vlan.txt",'r')
+            vlans = perse_results(file_.read(),"test.textfsm",'vlans')
+            file_.close()
+            #output['vlans'].append(ok)  
+            return jsonify({'vlans':vlans,'interfaces':interfaces})
+        except Exception as e:
+            return {'error': str(e)}
+api.add_resource(selectedSwitch, '/selectedSwitch')
+
 
 
 if __name__ == '__main__':

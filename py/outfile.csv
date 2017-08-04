@@ -1,0 +1,9 @@
+VLAN_ID;NAME;STATUS;
+1;default;active;
+2;VLAN0002;active;
+1;enet;100001;
+2;enet;100002;
+1002;fddi;101002;
+1003;tr;101003;
+1004;fdnet;101004;
+1005;trnet;101005;

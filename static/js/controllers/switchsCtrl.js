@@ -3,10 +3,12 @@ function switchsCtrl ($scope,switchsFactory, $location, $state) {
   console.log($scope.switchsList)*/
   switchsFactory.then(function (switchs) {
       $scope.switchsList = switchs;
+      console.log($scope.switchsList)
   })
+  
    $scope.goToSwitchDetail = function (index) {
         $state.go('home.switchDetail', {
-            selectedSwitch: $scope.switchsList[index][0]
+            selectedSwitch: index
         });
     }
   

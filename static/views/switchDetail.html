@@ -1,1 +1,42 @@
-<h1>ASDAS</h1>
+<div>
+    <h2>//switch[1]//</h2>
+    <h5>//switch[5]//</h5>
+    <h5>//switch[2]//</h5>
+
+</div>
+<hr>
+<div>
+    <h2>Connected Vlan</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th ng-repeat="title in vlansTitle">//title//</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="vlan in vlans">
+                <td ng-repeat="r in vlan">//r//</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<hr>
+<div>
+    <h2>Connected Status</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th ng-repeat="title in interfacesTitle">//title//</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="inter in interfaces">
+                <td ng-repeat="r in inter">//r//</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<hr>
