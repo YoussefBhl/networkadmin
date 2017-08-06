@@ -1,7 +1,8 @@
 (function() {
     angular.module('myApp', [
         'ngRoute',
-        'ui.router'
+        'ui.router',
+        'ui.bootstrap'
     ])
 })();
 

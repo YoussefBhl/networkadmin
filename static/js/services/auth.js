@@ -7,6 +7,9 @@ return{
     },
     isLoggedIn : function(){
         return(user)? user : false;
+    },
+    getUserRole : function(){
+        return user[3];
     }
   }
 }

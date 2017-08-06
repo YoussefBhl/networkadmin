@@ -18,12 +18,32 @@ function config($stateProvider,$interpolateProvider, $urlRouterProvider,$locatio
             templateUrl: 'views/switchs.html',
             controller: 'switchsCtrl',
         })
+        .state('home.camera',{
+            url: '/camera',
+            templateUrl: 'views/camera.html',
+            controller: 'cameraCtrl',
+        })
+        .state('home.settings',{
+            url: '/settings',
+            templateUrl: 'views/settings.html',
+            controller: 'settingsCtrl',
+        })
         .state('home.switchDetail', {
-            url: '/switchDetail/:selectedSwitch',
+            url: '/switchDetail/:selectedSwitchID',
             templateUrl: 'views/switchDetail.html',
             controller: 'switchDetailCtrl',
             params: {
-                selectedSwitch: null
+                selectedSwitchID: null,
+                selectedSwitch:""
+            }
+        })
+        .state('home.switchConf', {
+            url: '/switchConf/:selectedSwitchID',
+            templateUrl: 'views/switchConf.html',
+            controller: 'switchConfCtrl',
+            params: {
+                selectedSwitchID: null,
+                selectedSwitch:null
             }
         })
 
@@ -43,7 +63,7 @@ angular
             $location.path('/signin');
         }
         else {  
-            $location.path('/home');
+            $location.path('/home/switchs');
         }
     });
 });

@@ -1,9 +1,10 @@
 
-function homeCtrl($scope){
+function homeCtrl($scope, $state){
   var tabClasses;
   
   function initTabs() {
-    tabClasses = ["","","",""];
+    tabClasses = ["","",""];
+    tabClasses[0] = "active";
   }
   
   $scope.getTabClass = function (tabNum) {
@@ -15,17 +16,31 @@ function homeCtrl($scope){
   }
   
   $scope.setActiveTab = function (tabNum) {
-    initTabs();
     tabClasses[tabNum] = "active";
   };
   
-  $scope.tab1 = "This is first section";
-  $scope.tab2 = "This is SECOND section";
-  $scope.tab3 = "This is THIRD section";
-  $scope.tab4 = "This is FOUTRH section";
-  
   //Initialize 
   initTabs();
+  $scope.goToSwitchs = function () {
+    tabClasses[0] = "active";
+    tabClasses[1] = "";
+    tabClasses[2] = "";
+    $state.go('home.switchs');
+ 
+  };
+  $scope.goToCamera = function () {
+    tabClasses[0] = "";
+    tabClasses[1] = "active";
+    tabClasses[2] = "";
+    $state.go('home.camera');
+  };
+  $scope.goToSettings = function () {
+    tabClasses[0] = "";
+    tabClasses[1] = "";
+    tabClasses[2] = "active";
+    $state.go('home.settings');
+    
+  };
 }
 angular
     .module('myApp')
