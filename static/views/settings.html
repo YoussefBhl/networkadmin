@@ -1,1 +1,16 @@
-Settings
+<h4>User configuration</h4>
+<form name="myform" class="form-signin col-lg-10" style="margin:0 auto;">
+        <label for="username" class="sr-only"></label>username:
+        <input type="text" id="username" class="form-control input-mod" placeholder="//switch[3]//" ng-model="username" required>
+        <label for="password" class="sr-only"></label>password:
+        <input type="password" id="password" class="form-control input-mod" placeholder="//switch[4]//" ng-model="password" required>
+        <label for="password" class="sr-only"></label> Verify password:
+        <input type="password" id="passwordVerif" class="form-control input-mod" placeholder="//switch[4]//" ng-model="passwordVerif" required>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Save</button>
+        <p id="errorMsg" style="display:none; color:red">Password not the same</p>
+        <p id="errorMsgDuplicate" style="display:none; color:red">User exists</p>
+    <p ng-show="modTrue" style="color:green">configuration was modified</p>
+    </form>
+    <div>
+        
+    </div>

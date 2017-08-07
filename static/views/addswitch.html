@@ -2,7 +2,8 @@
     <div class="modal-header">
         <h4 class="modal-title">Add Switch</h4>
     </div>
-    <form name="myform" class="form-signin col-lg-10" style="margin:0 auto;">
+    <form name="myform" >
+        <div class="modal-body ">
         <label name='input' class="sr-only"></label>Switch's name:
         <input type="text" id="name" class="form-control input-mod" placeholder="//switch[1]//" autofocus="" ng-model="name" required>
         <label for="inputPassword" class="sr-only"></label>Ip:
@@ -14,10 +15,13 @@
         <label class="radio-inline"><input type="radio" checked="checked" name="optradio" value="cisco_ios">cisco_ios</label>
         <label class="radio-inline"><input type="radio" name="optradio" value="HP">HP</label>
         <p id="errorMsg" style="display:none; color:red">Wrong Ip </p>
-    <p ng-show="modTrue" style="color:green">configuration was modified</p>
-    </form>
+        <p id="errorMsgDuplicate" style="display:none; color:red">Switch already exist</p>
+        <p ng-show="modTrue" style="color:green">configuration was modified</p>
+        </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="ok()">Save</button>
     </div>
+    </form>
+    
 </div>

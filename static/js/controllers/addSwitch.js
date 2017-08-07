@@ -49,13 +49,14 @@ function addSwitch ($rootScope,$scope,$uibModalInstance,$http,$timeout,switchsFa
                     }
                 })
                 .then(function (resp) {
-                    if (resp.data) {
+                    if (!resp.data) {
                         $scope.modTrue = true;
                         $timeout(function () {
                             $rootScope.$broadcast("Switch Added");
                             $uibModalInstance.close();
                         }, 1000);
                     }
+                    
                 }, function (error) {
                     alert(error);
                 });

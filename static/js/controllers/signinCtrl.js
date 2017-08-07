@@ -22,7 +22,7 @@ function signinCtrl($http, $scope, Auth) {
                     document.getElementById("errorMsg").style.display = "block";
                 }
             }, function (error) {
-                alert(error);
+                console.log(error);
             });
     }
 };

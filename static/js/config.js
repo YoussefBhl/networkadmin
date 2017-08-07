@@ -28,6 +28,11 @@ function config($stateProvider,$interpolateProvider, $urlRouterProvider,$locatio
             templateUrl: 'views/settings.html',
             controller: 'settingsCtrl',
         })
+        .state('home.addUser',{
+            url: '/addUser',
+            templateUrl: 'views/addUser.html',
+            controller: 'addUserCtrl',
+        })
         .state('home.switchDetail', {
             url: '/switchDetail/:selectedSwitchID',
             templateUrl: 'views/switchDetail.html',

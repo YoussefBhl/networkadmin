@@ -1,4 +1,4 @@
-function switchsCtrl ($scope,switchsFactory, $location, $state,$uibModal,$http) {
+function switchsCtrl ($scope,switchsFactory, $location, $state,$uibModal,$http,$rootScope) {
   /*$scope.switchsList = switchsFactory;*/
   $scope.switchsList = [];
   //get switch list 
@@ -44,8 +44,8 @@ function switchsCtrl ($scope,switchsFactory, $location, $state,$uibModal,$http) 
                     }
                 })
                 .then(function (resp) {
-                    if (resp.data) {
-                       switchsFactory.get().success(handleSuccess);
+                    if (!resp.data) {
+                        switchsFactory.get().success(handleSuccess);
                     }
                 }, function (error) {
                     alert(error);

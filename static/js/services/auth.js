@@ -10,7 +10,11 @@ return{
     },
     getUserRole : function(){
         return user[3];
+    },
+    getUserID : function(){
+        return user[0];
     }
+
   }
 }
 angular

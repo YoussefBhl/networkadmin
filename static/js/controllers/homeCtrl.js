@@ -1,9 +1,9 @@
 
-function homeCtrl($scope, $state){
+function homeCtrl($scope, $state,Auth){
   var tabClasses;
   
   function initTabs() {
-    tabClasses = ["","",""];
+    tabClasses = ["","","",""];
     tabClasses[0] = "active";
   }
   
@@ -25,6 +25,7 @@ function homeCtrl($scope, $state){
     tabClasses[0] = "active";
     tabClasses[1] = "";
     tabClasses[2] = "";
+    tabClasses[3] = "";
     $state.go('home.switchs');
  
   };
@@ -32,15 +33,28 @@ function homeCtrl($scope, $state){
     tabClasses[0] = "";
     tabClasses[1] = "active";
     tabClasses[2] = "";
+    tabClasses[3] = "";
     $state.go('home.camera');
   };
   $scope.goToSettings = function () {
     tabClasses[0] = "";
     tabClasses[1] = "";
     tabClasses[2] = "active";
+    tabClasses[3] = "";
     $state.go('home.settings');
     
   };
+  $scope.logout = function () {
+    Auth.setUser(null);
+    
+  };
+  $scope.goAddUser = function(){
+    tabClasses[0] = "";
+    tabClasses[1] = "";
+    tabClasses[2] = "";
+    tabClasses[3] = "active";
+    $state.go('home.addUser');
+  }
 }
 angular
     .module('myApp')
