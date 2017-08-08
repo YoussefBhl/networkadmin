@@ -53,7 +53,7 @@ function homeCtrl($scope, $state,Auth){
     tabClasses[1] = "";
     tabClasses[2] = "";
     tabClasses[3] = "active";
-    $state.go('home.addUser');
+    $state.go('home.DeleteAddUser');
   }
 }
 angular

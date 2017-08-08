@@ -3,7 +3,7 @@ from flask_restful import Resource, Api,reqparse
 from flask.ext.cors import CORS
 from flask.ext.mysql import MySQL
 from  collect_data import perse_results, try_to_connect
-from db_manager import db_login,db_switchsList,db_userList,db_changeSwitch,db_addSwitch,db_deleteSwitch
+from db_manager import db_login,db_switchsList,db_userList,db_changeSwitch,db_addSwitch,db_deleteSwitch,db_changeUserConf,db_addUser,db_deleteUser
 mysql = MySQL()
 # MySQL configurations
 selectedSwitchID = -1
@@ -146,32 +146,61 @@ class changeUserConf(Resource):
             _id = args['id']
             _password = args['password']
             _username = args['username']
-            conn = mysql.connect()
-            cursor = conn.cursor()
             if(_role == "0"):
-                tableName = "superUser"
-                tableuser = "user"
+                userTableName = "superUser"
+                otherTableName = "user"
             else:
-                tableName = "user"
-                tableuser = "superUser"
-            query = "select * from {0} where username = '{1}';".format(tableuser,_username)
-            cursor.execute(query)
-            data = cursor.fetchall()
-            cursor.close()
-            if (len(data) > 0):
-                return {'error':'user already exists'}
+                userTableName = "user"
+                otherTableName = "superUser"
+            return db_changeUserConf(otherTableName,userTableName,_username,_password,_id)    
+        except Exception as e:
+            return {'error': str(e)}
+api.add_resource(changeUserConf, '/changeUserConf')
+class addUser(Resource):
+    def post(self):
+        try:
+            #change swtich info in db
+            parser = reqparse.RequestParser()
+            parser.add_argument('role', type=str)
+            parser.add_argument('username', type=str)
+            parser.add_argument('password', type=str)
+            args = parser.parse_args()
+            _role = args['role']
+            _password = args['password']
+            _username = args['username']
+            if(_role == "Admin"):
+                _role = 0
+                userTableName = "superUser"
+                otherTableName = "user"
             else:
-                cursor = conn.cursor()
-                query = "update {0} set username='{1}',password='{2}' where ID='{3}';".format(tableName,_username,_password,_id)
-                data = cursor.execute(query)
-                conn.commit()
-                cursor.close()
-                return data
+                _role = 1
+                userTableName = "user"
+                otherTableName = "superUser"
+
+            #data = cursor.fetchall()
+            return db_addUser(otherTableName,userTableName,_username,_password,_role)
 
         except Exception as e:
-            return {'error': "OK"}
-api.add_resource(changeUserConf, '/changeUserConf')
-
-
+            return {'error': str(e)}
+api.add_resource(addUser, '/addUser')
+class deleteUser(Resource):
+    def post(self):
+        try:
+            #change swtich info in db
+            parser = reqparse.RequestParser()
+            parser.add_argument('id', type=str)
+            parser.add_argument('role', type=str)
+            args = parser.parse_args()
+            _id = args['id']
+            _role = args['role']
+            if(_role == "0"):
+                userTableName = "superUser"
+            else:
+                userTableName = "user"
+            #data = cursor.fetchall()
+            return db_deleteUser(userTableName,_id)
+        except Exception as e:
+            return {'error': str(e)}
+api.add_resource(deleteUser, '/deleteUser')
 if __name__ == '__main__':
     app.run(debug=True)

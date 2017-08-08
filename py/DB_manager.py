@@ -69,4 +69,42 @@ def db_deleteSwitch(_id):
 	db.commit()
 	cursor.close()
 	return jsonify(data)
-	
+def db_changeUserConf(otherTableName,userTableName,_username,_password,_id)	:
+	cursor = db.cursor()
+	query = "select * from {0} where username = '{1}';".format(otherTableName,_username)
+	cursor.execute(query)
+	data = cursor.fetchall()
+	cursor.close()
+	if (len(data) > 0):
+		return jsonify({'error':'user already exists'})
+	else:
+		cursor = db.cursor()
+		query = "update {0} set username='{1}',password='{2}' where ID='{3}';".format(userTableName,_username,_password,_id)
+		data = cursor.execute(query)
+		db.commit()
+		cursor.close()
+		return jsonify(data)
+def db_addUser(otherTableName,userTableName,_username,_password,_role):
+	cursor = db.cursor()
+	query = "select * from {0} where username = '{1}';".format(otherTableName,_username)
+	cursor.execute(query)
+	data = cursor.fetchall()
+	cursor.close()
+	if (len(data) > 0):
+		return jsonify({'error':'user already exists'})
+	else:
+		cursor = db.cursor()
+		query = "INSERT INTO {0}(username,password,permession) VALUES('{1}','{2}','{3}');".format(userTableName,_username,_password,_role)
+		data = cursor.execute(query)
+		db.commit()
+		cursor.close()
+		return jsonify(data)
+
+def db_deleteUser(tableName,_id):
+	cursor = db.cursor()
+	query = "delete from {0} where ID = '{1}';".format(tableName,_id)
+	data = cursor.execute(query)
+	db.commit()
+	cursor.close()
+	return jsonify(data)
+

@@ -1,0 +1,29 @@
+<div class="project-list" style="height:100%">
+    <br>
+    <button restrict access="0" type="button" class="btn btn-default btn-sm" ng-click="ok()">
+          <span class="glyphicon glyphicon-plus"></span> Add new User
+        </button>
+         <br><br>
+    <h4>List:</h4>
+    <table class="table table-hover">
+        <tbody>
+            <tr ng-repeat="user in usersList">
+                <td class="project-title">
+                    <a>//user[1]//</a>
+                    <br/>
+                    <small>//user[2]//</small>
+                </td>
+                <td class="project-title">
+                    <a>//user[1]//</a>
+                    <br/>
+                    <small>//user[2]//</small>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm" ng-click="deleteUser(user[3],user[0])">
+                    <span class="glyphicon glyphicon-remove"></span> Remove 
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

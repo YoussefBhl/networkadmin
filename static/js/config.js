@@ -28,10 +28,10 @@ function config($stateProvider,$interpolateProvider, $urlRouterProvider,$locatio
             templateUrl: 'views/settings.html',
             controller: 'settingsCtrl',
         })
-        .state('home.addUser',{
-            url: '/addUser',
-            templateUrl: 'views/addUser.html',
-            controller: 'addUserCtrl',
+        .state('home.DeleteAddUser',{
+            url: '/DeleteAddUser',
+            templateUrl: 'views/DeleteAddUser.html',
+            controller: 'DeleteAddUserCtrl',
         })
         .state('home.switchDetail', {
             url: '/switchDetail/:selectedSwitchID',

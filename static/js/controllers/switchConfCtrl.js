@@ -54,7 +54,7 @@ function switchConfCtrl($scope, $stateParams, switchsFactory, $timeout, $http,$s
                     }
                 })
                 .then(function (resp) {
-                    if (resp.data) {
+                    if (!resp.data) {
                         $scope.modTrue = true;
                         $timeout(function () {
                             $state.go('home.switchs');

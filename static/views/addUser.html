@@ -1,24 +1,25 @@
-<div class="project-list" style="height:100%">
-    <br>
-    <button restrict access="0" type="button" class="btn btn-default btn-sm" ng-click="addSwitch()">
-          <span class="glyphicon glyphicon-plus"></span> Add new User
-        </button>
-         <br><br>
-    <h4>Users List:</h4>
-    <table class="table table-hover">
-        <tbody>
-            <tr ng-repeat="user in usersList">
-                <td class="project-title" ng-click="goToSwitchDetail(switch)">
-                    <a>//user[1]//</a>
-                    <br/>
-                    <small>//user[2]//</small>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger btn-sm" ng-click="deleteSwitch(switch[0])">
-                    <span class="glyphicon glyphicon-remove"></span> Remove 
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Add Switch</h4>
+    </div>
+    <form name="myform" >
+        <div class="modal-body ">
+        <label name='input' class="sr-only"></label>username:
+        <input type="text" id="name" class="form-control input-mod" placeholder="//switch[1]//" autofocus="" ng-model="username" required>
+        <label for="password" class="sr-only"></label>password:
+        <input type="password" id="password" class="form-control input-mod" placeholder="//switch[4]//" ng-model="password" required>
+        <label for="password" class="sr-only"></label> Verify password:
+        <input type="password" id="passwordVerif" class="form-control input-mod" placeholder="//switch[4]//" ng-model="passwordVerif" required>
+        <label class="radio-inline"><input type="radio" checked="checked" name="optradio" value="cisco_ios">User</label>
+        <label class="radio-inline"><input type="radio" name="optradio" value="HP">Admin</label>
+        <p id="errorMsg" style="display:none; color:red">Password not the same</p>
+        <p id="errorMsgDuplicate" style="display:none; color:red">User exists</p>
+        <p ng-show="modTrue" style="color:green">configuration was modified</p>
+        </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Save</button>
+    </div>
+    </form>
+    
 </div>

@@ -1,7 +1,6 @@
 function settingsCtrl ($scope, $state,$timeout,$http,Auth) {
     function verfPassword(pass){
         if($scope.password == pass){
-            console.log("EEEy")
             return true;
         }
         else
@@ -24,8 +23,7 @@ function settingsCtrl ($scope, $state,$timeout,$http,Auth) {
                     }
                 })
                 .then(function (resp) {
-                    console.log(resp.data)
-                    if (resp.data['error']) {
+                    if (resp.data) {
                         document.getElementById("errorMsgDuplicate").style.display = "block";
                     }
                     else{
