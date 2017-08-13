@@ -1,6 +1,7 @@
 function cameraCtrl($scope, cameraFactory, $location, $state, $uibModal, $http) {
     /*$scope.switchsList = switchsFactory;*/
     $scope.device = "Camera"
+    $scope.btn = "show";
     listeBaseCtrl.call(this, $scope, $uibModal, $state, $http);
     var self = this;
     $scope.devicesList = [];
@@ -30,6 +31,13 @@ function cameraCtrl($scope, cameraFactory, $location, $state, $uibModal, $http) 
                         tableName:"camera"
                     }
         this.deleteDevice(cameraFactory,handleSuccess,data);
+    }
+    $scope.showMore = function(){
+        $scope.show = !$scope.show;
+        if($scope.show == true)
+            $scope.btn = "hide";
+        else
+            $scope.btn = "show";
     }
 }
 switchsCtrl.prototype = Object.create(listeBaseCtrl.prototype);

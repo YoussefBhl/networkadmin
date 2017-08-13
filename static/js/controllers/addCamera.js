@@ -1,6 +1,5 @@
 function addCamera($rootScope, $scope, $uibModalInstance, $http, $timeout, switchsFactory) {
-    /*$scope.switchsList = switchsFactory;
-    console.log($scope.switchsList)*/
+
     $scope.isSwitch = false;
     $scope.device = "Camera"
     addBaseCtrl.call(this, $scope, $http, $rootScope, $uibModalInstance, $timeout);

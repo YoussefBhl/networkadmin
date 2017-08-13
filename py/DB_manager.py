@@ -39,7 +39,7 @@ def db_deviceList(tableName):
 	return jsonify(data,final_data)
 def db_userList(_id):
 	cursor = db.cursor()
-	query = "select * from superuser where ID <> {0};".format(_id)
+	query = "select * from superuser where ID <> {0} AND ID <> 0;".format(_id)
 	cursor.execute(query)
 	data = cursor.fetchall()
 	cursor.close()

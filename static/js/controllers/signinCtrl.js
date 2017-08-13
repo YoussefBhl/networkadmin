@@ -22,7 +22,7 @@ function signinCtrl($http, $scope, Auth) {
                     document.getElementById("errorMsg").style.display = "block";
                 }
             }, function (error) {
-                console.log(error);
+                alert("Cannot connect to server");
             });
     }
 };

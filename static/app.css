@@ -277,5 +277,9 @@ FOOTER
 	position: relative;
 }
 .btn-show{
-	width:8%;
+	color: #347ab7;
+	border: 1px solid  white;
+}
+p{
+	margin: 0;
 }

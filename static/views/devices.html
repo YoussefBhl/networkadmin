@@ -3,7 +3,7 @@
     <button restrict access="0" type="button" class="btn btn-default btn-sm" ng-click="addDevice()">
           <span class="glyphicon glyphicon-plus"></span> Add new //device//
         </button>
-         <br><br>
+    <br><br>
     <h4>//device//s List:</h4>
     <table class="table table-hover">
         <tbody>
@@ -16,7 +16,15 @@
                 <td class="project-title" ng-click="goToDeviceDetail(device)">
                     <h5 style="padding:0;margin:0;">//device[1]//</h5>
                     <br/>
-                    <small>//device[2]//</small>
+                    <p>//device[2]//</p>
+                    <div ng-show="show">
+                        <p> Model: //device[5]//</p>
+                        <p restrict access="0"> username: //device[3]//</p>
+                        <p restrict access="0"> password: //device[4]//</p>
+                    </div>
+                </td>
+                <td class="project-actions">
+                    <a class="btn btn-white btn-sm btn-show" ng-click="showMore()"><i class="fa fa-folder"></i> //btn// </a>
                 </td>
                 <td restrict access="0">
                     <button type="button" class="btn btn-success btn-sm" ng-click="goToDeviceConf(device)">

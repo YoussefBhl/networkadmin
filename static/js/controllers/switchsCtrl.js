@@ -1,5 +1,6 @@
 function switchsCtrl ($scope,switchsFactory, $location, $state,$uibModal,$http,$rootScope) {
   /*$scope.switchsList = switchsFactory;*/
+  $scope.btn = "show";
   $scope.device = "Switch"
   listeBaseCtrl.call(this, $scope,$uibModal,$state,$http);
     var self = this;
@@ -18,6 +19,13 @@ function switchsCtrl ($scope,switchsFactory, $location, $state,$uibModal,$http,$
   //open pop up when user want to add new switch
     $scope.addDevice = function(){
         this.newDevice('views/addDevice.html','addSwitch')
+    }
+    $scope.showMore = function(){
+        $scope.show = !$scope.show;
+        if($scope.show == true)
+            $scope.btn = "hide";
+        else
+            $scope.btn = "show";
     }
     //when user add new switch we refresh list
     $scope.$on("Switch Added",function(pevent,padata){
