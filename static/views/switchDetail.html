@@ -1,50 +1,52 @@
-<style type="text/css">
-    #mynetwork {
-      width: 400px;
-      height: 350px;
-      border: 1px solid lightgray;
-    }
-  </style>
-<div>
-    <h2>//switch[1]//</h2>
-    <h5>//switch[5]//</h5>
-    <h5>//switch[2]//</h5>
-
+<h2> //switch[1]//</h2>
+<a type="submit" ng-click="showMore()" class="button btn btn-lg btn-default btn-block btn-show">//btn//</a>
+<div ng-show="show">
+<h4>Ip: //switch[2]//</h4>
+<h4> Model: //switch[5]//</h4>
+<h4 restrict access="0"> username: //switch[3]//</h4>
+<h4 restrict access="0"> password: //switch[4]//</h4>
 </div>
-<hr>
-<div>
-    <h2>Connected Vlan</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th ng-repeat="title in vlansTitle">//title//</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="vlan in vlans">
-                <td ng-repeat="r in vlan">//r//</td>
-            </tr>
-        </tbody>
-    </table>
+
+
+<hr>
+<div class="row">
+    <div class="col-lg-8 col-sm-6 col-xs-12">
+        <h2>Connected Vlan</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-repeat="title in vlansTitle">//title//</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="vlan in vlans">
+                        <td ng-repeat="r in vlan">//r//</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+        <h2>Interfaces Status</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th ng-repeat="title in interfacesTitle">//title//</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="inter in interfaces">
+                        <td ng-repeat="r in inter">//r//</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h2>Interfaces Graph</h2>
+    <div class="col-lg-4 col-sm-6 " id="mynetwork"></div>
 </div>
-<hr>
-<div>
-    <h2>Interfaces Status</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th ng-repeat="title in interfacesTitle">//title//</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="inter in interfaces">
-                <td ng-repeat="r in inter">//r//</td>
-            </tr>
-        </tbody>
-    </table>
-
-</div>
-<hr>
-<div id="mynetwork"></div>

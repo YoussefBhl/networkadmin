@@ -5,7 +5,6 @@ import json
 def try_to_connect(ip,username,password):
     try:
         ssh_connection = ConnectHandler(
-            device_type='cisco_ios',
             ip=ip,
             username=username,
             password=password,
@@ -15,7 +14,7 @@ def try_to_connect(ip,username,password):
     except Exception as e:
             return "deactive"
         
-def run_command_cli(ip, username, password,command):
+def run_cli_command(ip, username, password,command):
     """
     get the CDP neighbor detail from the given device using SSH
 
@@ -46,37 +45,37 @@ def run_command_cli(ip, username, password,command):
     ssh_connection.disconnect()
     #print result
     return result
-def perse_results(input,temp,outp):
+def perse_results(input,temp):
     template = open(temp)
     re_table = textfsm.TextFSM(template)
     fsm_results = re_table.ParseText(input)
     # the results are written to a CSV file
-    outfile_name = open("outfile.csv", "w+")
-    outfile = outfile_name
+    #outfile_name = open("outfile.csv", "w+")
+    #outfile = outfile_name
     #print(re_table.header)
-    print fsm_results
+    #print fsm_results
     header = []
     for s in re_table.header:
-        outfile.write("%s;" % s)
+        #outfile.write("%s;" % s)
         header.append(s)
-    outfile.write("\n")
+    #outfile.write("\n")
     counter = 0
     #output = []
     output = []
     for row in fsm_results:
-        print(row)
+       # print(row)
         i = 0
         data = {}
         for s in row:
-            outfile.write("%s;" % s)
+            #outfile.write("%s;" % s)
             data[header[i]] = s
             i = i +1
-        outfile.write("\n")
+        #outfile.write("\n")
         counter += 1
         output.append(data)
     json_data = json.dumps(output)
     return output
-    print("Write %d records" % counter)
+    #print("Write %d records" % counter)
 
 
 '''result = run_command_cli('192.168.1.100','admin','admin')

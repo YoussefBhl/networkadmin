@@ -14,7 +14,7 @@ function signinCtrl($http, $scope, Auth) {
                 }
             })
             .then(function (resp) {
-                if (resp.data.status != 100) {
+                if (resp.data) {
                     Auth.setUser(resp.data);   
                 }
                 else

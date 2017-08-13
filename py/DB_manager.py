@@ -26,9 +26,10 @@ def db_login(_username,_userPassword):
 				return jsonify(data[0])
 			else:
 				return {'status': 100, 'message': 'Authentication failure'}
-def db_switchsList():
+def db_deviceList(tableName):
 	cursor = db.cursor()
-	cursor.execute("SELECT * FROM switchs;")
+	query = "SELECT * FROM {0};".format(tableName)
+	cursor.execute(query)
 	data = cursor.fetchall()
 	cursor.close()
 	final_data = []
@@ -48,23 +49,25 @@ def db_userList(_id):
 	cursor.close()
 	return jsonify(data)
 
-def db_changeSwitch(_name,_ip,_username,_password,_model,_id):
+def db_changeDevice(_tableName,_name,_ip,_username,_password,_model,_id):
 	cursor = db.cursor()
-	data = cursor.execute("UPDATE switchs SET switchName = %s ,IP = %s, username = %s, password = %s, model = %s where ID = %s;",(_name,_ip,_username,_password,_model,_id))
+	query = "UPDATE {0} SET deviceName = '{1}' ,IP = '{2}', username = '{3}', password = '{4}', model = '{5}' where ID = '{6}';".format(_tableName,_name,_ip,_username,_password,_model,_id)
+	data = cursor.execute(query)
 	db.commit()
 	cursor.close()
-	return jsonify(data)	
+	return data	
 
-def db_addSwitch(_name,_ip,_username,_password,_model):
+def db_addDevice(_tableName,_name,_ip,_username,_password,_model):
 	cursor = db.cursor()
-	data = cursor.execute("INSERT INTO switchs(switchName,IP,username,password,model) VALUES(%s,%s,%s,%s,%s);",(_name,_ip,_username,_password,_model))
+	query = "INSERT INTO {0}(deviceName,IP,username,password,model) VALUES('{1}','{2}','{3}','{4}','{5}');".format(_tableName,_name,_ip,_username,_password,_model)
+	data = cursor.execute(query)
 	db.commit()
 	#data = cursor.fetchall()
 	cursor.close()
 	return data
-def db_deleteSwitch(_id):
+def db_deleteDevice(tableName,_id):
 	cursor = db.cursor()
-	query = "delete from switchs where ID = '{0}';".format(_id)
+	query = "delete from {0} where ID = '{1}';".format(tableName,_id)
 	data = cursor.execute(query)
 	db.commit()
 	cursor.close()

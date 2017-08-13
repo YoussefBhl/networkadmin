@@ -1,8 +1,8 @@
-function addSwitch($rootScope, $scope, $uibModalInstance, $http, $timeout, switchsFactory) {
+function addCamera($rootScope, $scope, $uibModalInstance, $http, $timeout, switchsFactory) {
     /*$scope.switchsList = switchsFactory;
     console.log($scope.switchsList)*/
-    $scope.isSwitch = true;
-    $scope.device = "Switch";
+    $scope.isSwitch = false;
+    $scope.device = "Camera"
     addBaseCtrl.call(this, $scope, $http, $rootScope, $uibModalInstance, $timeout);
     var self = this;
     var radios = document.getElementsByName('optradio');
@@ -15,9 +15,9 @@ function addSwitch($rootScope, $scope, $uibModalInstance, $http, $timeout, switc
                     username: $scope.username,
                     password: $scope.password,
                     model: this.getRadios(radios),
-                    tableName: "switchs"
+                    tableName: "camera"
                 }
-                this.addDevice('http://127.0.0.1:5000/addDevice', data, "Switch Added")
+                this.addDevice('http://127.0.0.1:5000/addDevice', data, "Camera Added")
 
             } else {
                 document.getElementById("errorMsgPass").style.display = "block";
@@ -25,6 +25,8 @@ function addSwitch($rootScope, $scope, $uibModalInstance, $http, $timeout, switc
                 document.getElementById("errorMsgDuplicate").style.display = "none";
             }
         }
+
+
     };
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
@@ -33,7 +35,7 @@ function addSwitch($rootScope, $scope, $uibModalInstance, $http, $timeout, switc
 
 
 }
-addSwitch.prototype = Object.create(addBaseCtrl.prototype);
+addCamera.prototype = Object.create(addBaseCtrl.prototype);
 angular
     .module('myApp')
-    .controller('addSwitch', addSwitch)
+    .controller('addCamera', addCamera)

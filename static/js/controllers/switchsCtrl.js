@@ -1,58 +1,39 @@
 function switchsCtrl ($scope,switchsFactory, $location, $state,$uibModal,$http,$rootScope) {
   /*$scope.switchsList = switchsFactory;*/
-  $scope.switchsList = [];
+  $scope.device = "Switch"
+  listeBaseCtrl.call(this, $scope,$uibModal,$state,$http);
+    var self = this;
+  $scope.devicesList = [];
   //get switch list 
     var handleSuccess = function(data, status) {
-        $scope.switchsList = data;
+        $scope.devicesList = data;
     };
     switchsFactory.get().success(handleSuccess);
-   $scope.goToSwitchDetail = function (selectedSwitch) {
-        $state.go('home.switchDetail', {
-            selectedSwitchID: selectedSwitch[0],
-            selectedSwitch:selectedSwitch
-        });
+   $scope.goToDeviceDetail = function (selectedSwitch) {
+       this.goToDeviceURL('home.switchDetail',selectedSwitch)
     }
-    $scope.goToSwitchConf = function (selectedSwitch) {
-        $state.go('home.switchConf', {
-            selectedSwitchID: selectedSwitch[0],
-            selectedSwitch: selectedSwitch
-        });
+    $scope.goToDeviceConf = function (selectedSwitch) {
+        this.goToDeviceURL('home.switchConf',selectedSwitch)
     }
   //open pop up when user want to add new switch
-    $scope.addSwitch = function(){
-        var modalInstance = $uibModal.open({
-                    templateUrl: 'views/addswitch.html',
-                    controller: addSwitch,
-                    scope: $scope,
-                    windowClass: "animated fadeIn"
-                });
+    $scope.addDevice = function(){
+        this.newDevice('views/addDevice.html','addSwitch')
     }
     //when user add new switch we refresh list
     $scope.$on("Switch Added",function(pevent,padata){
              switchsFactory.get().success(handleSuccess);
            })
 
-    $scope.deleteSwitch = function(id){
-        $http({
-                    method: 'POST',
-                    url: 'http://127.0.0.1:5000/deleteSwitch',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    data: {
+    $scope.delete = function(id){
+        data = {
                         id: id,
+                        tableName:"switchs"
                     }
-                })
-                .then(function (resp) {
-                    if (!resp.data) {
-                        switchsFactory.get().success(handleSuccess);
-                    }
-                }, function (error) {
-                    alert(error);
-                });
-
+       this.deleteDevice(switchsFactory,handleSuccess,data);
     }
 }
+switchsCtrl.prototype = Object.create(listeBaseCtrl.prototype);
+
 angular
     .module('myApp')
     .controller('switchsCtrl', switchsCtrl)

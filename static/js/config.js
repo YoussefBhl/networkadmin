@@ -15,12 +15,12 @@ function config($stateProvider,$interpolateProvider, $urlRouterProvider,$locatio
         })
         .state('home.switchs',{
             url: '/switchs',
-            templateUrl: 'views/switchs.html',
+            templateUrl: 'views/devices.html',
             controller: 'switchsCtrl',
         })
         .state('home.camera',{
             url: '/camera',
-            templateUrl: 'views/camera.html',
+            templateUrl: 'views/devices.html',
             controller: 'cameraCtrl',
         })
         .state('home.settings',{
@@ -34,21 +34,30 @@ function config($stateProvider,$interpolateProvider, $urlRouterProvider,$locatio
             controller: 'DeleteAddUserCtrl',
         })
         .state('home.switchDetail', {
-            url: '/switchDetail/:selectedSwitchID',
+            url: '/switchDetail/:selectedDeviceID',
             templateUrl: 'views/switchDetail.html',
             controller: 'switchDetailCtrl',
             params: {
-                selectedSwitchID: null,
-                selectedSwitch:""
+                selectedDeviceID: null,
+                selectedDevice:""
             }
         })
         .state('home.switchConf', {
-            url: '/switchConf/:selectedSwitchID',
-            templateUrl: 'views/switchConf.html',
+            url: '/switchConf/:selectedDeviceID',
+            templateUrl: 'views/deviceConf.html',
             controller: 'switchConfCtrl',
             params: {
-                selectedSwitchID: null,
-                selectedSwitch:null
+                selectedDeviceID: null,
+                selectedDevice:""
+            }
+        })
+        .state('home.cameraConf', {
+            url: '/cameraConf/:selectedDeviceID',
+            templateUrl: 'views/deviceConf.html',
+            controller: 'switchConfCtrl',
+            params: {
+                selectedDeviceID: null,
+                selectedDevice:""
             }
         })
 

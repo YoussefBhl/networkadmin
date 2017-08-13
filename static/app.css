@@ -1,4 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Bree+Serif);
+
+
+    #mynetwork {
+      width: 400px;
+      height: 350px;
+      border: 1px solid lightgray;
+    }
 
 ::selection {
 	color: #fff;
@@ -23,6 +29,7 @@ body {
 	text-align: left;
 	text-decoration: none;
 	height: 500px;
+	overflow-x:hidden;
 }
 #container{
 	border-radius: 5px;
@@ -268,4 +275,7 @@ FOOTER
 	overflow: auto;	
 	margin: 0 auto;
 	position: relative;
+}
+.btn-show{
+	width:8%;
 }

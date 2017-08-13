@@ -2,7 +2,6 @@ function DeleteAddUserCtrl ($scope,usersFactory, $location, $state,$uibModal,$ht
   $scope.usersList = [];
   //get switch list 
     var handleSuccess = function(data, status) {
-        console.dir(data)
         $scope.usersList = data;
     };
     usersFactory.get().success(handleSuccess);

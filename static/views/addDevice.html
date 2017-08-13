@@ -1,0 +1,30 @@
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Add //device//</h4>
+    </div>
+    <form name="myform" >
+        <div class="modal-body ">
+        <label name='input' class="sr-only"></label>//device//'s name:
+        <input type="text" id="name" class="form-control input-mod"autofocus="" ng-model="name" required>
+        <label for="inputPassword" class="sr-only"></label>Ip:
+        <input type="text" id="Ip" class="form-control input-mod"  ng-model="Ip" required>
+        <label for="username" class="sr-only"></label>username:
+        <input type="text" id="username" class="form-control input-mod" ng-model="username" required>
+        <label for="password" class="sr-only"></label>password:
+        <input type="password" id="password" class="form-control input-mod" ng-model="password" required>
+        <label for="password" class="sr-only"></label> Verify password:
+        <input type="password" id="passwordVerif" class="form-control input-mod" ng-model="passwordVerif" required>
+        <label ng-if="isSwitch" class="radio-inline"><input type="radio" checked="checked" name="optradio" value="cisco_ios">cisco_ios</label>
+        <label ng-if="isSwitch"  class="radio-inline"><input type="radio" name="optradio" value="HP">HP</label>
+        <p id="errorMsg" style="display:none; color:red">Wrong Ip </p>
+        <p id="errorMsgDuplicate" style="display:none; color:red">Device already exist</p>
+        <p ng-show="modTrue" style="color:green">configuration was modified</p>
+        <p id="errorMsgPass" style="display:none; color:red">Password not the same</p>
+        </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" ng-click="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">Save</button>
+    </div>
+    </form>
+    
+</div>

@@ -1,7 +1,9 @@
 function switchDetailCtrl($scope, $stateParams, switchsFactory, $http) {
     //$scope.switchName = $stateParams.selectedSwitch;
-    $scope.switch = $stateParams.selectedSwitch;
-    var switchIndex = $stateParams.selectedSwitchID;
+    $scope.switch = $stateParams.selectedDevice;
+    var switchId = $stateParams.selectedDeviceID;
+    $scope.show = false;
+    $scope.btn = "show";
     var switchName = $scope.switch[1];
 
     //sent to server the selected switch's ID
@@ -21,10 +23,12 @@ function switchDetailCtrl($scope, $stateParams, switchsFactory, $http) {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             data: {
-                ID: switchIndex
+                switch: $scope.switch,
+                model: $scope.switch[5]
             }
         })
         .then(function (resp) {
+            console.log(resp)
             vlans = resp.data['vlans'];
             interfaces = resp.data['interfaces'];
             for (i in vlans) {
@@ -46,7 +50,7 @@ function switchDetailCtrl($scope, $stateParams, switchsFactory, $http) {
                 ypos += 70;
                 edges.push({from:0,to:parseInt(i) + 1,label:interfaces[i]['PORT'],arrows:'to'})
             }
-            nodes.push({id: 0,label: switchName,x: -40,y: (-140+ypos)/2, physics: false})
+            nodes.push({id: 0,label: switchName,x: -100,y: (-140+ypos)/2, physics: false})
             var container = document.getElementById('mynetwork');
             var data = {
                 nodes: nodes,
@@ -77,7 +81,13 @@ function switchDetailCtrl($scope, $stateParams, switchsFactory, $http) {
             alert(error);
         });
 
-
+    $scope.showMore = function(){
+        $scope.show = !$scope.show;
+        if($scope.show == true)
+            $scope.btn = "hide";
+        else
+            $scope.btn = "show";
+    }
 }
 
 angular
