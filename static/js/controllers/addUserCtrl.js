@@ -1,4 +1,5 @@
 function addUserCtrl ($scope,$timeout, $rootScope, $state,$uibModalInstance,$http) {
+$scope.username = "";
  function verfPassword(pass){
         if($scope.password == pass){
             return true;
@@ -15,6 +16,8 @@ function addUserCtrl ($scope,$timeout, $rootScope, $state,$uibModalInstance,$htt
         }
     }
     var radios = document.getElementsByName('optradio');
+    //if the user click save we check if the passwords are mutached the send request to the server
+    //if the user added we close the window else a error message popup
     $scope.ok = function () {
         if (verfPassword($scope.passwordVerif)) {
             $http({
@@ -47,11 +50,12 @@ function addUserCtrl ($scope,$timeout, $rootScope, $state,$uibModalInstance,$htt
         else{
             document.getElementById("errorMsg").style.display = "block";
         }
-        
-
+    };
+        $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
     };
 }
 angular
-    .module('myApp')
+    .module('inspinia')
     .controller('addUserCtrl', addUserCtrl)
     

@@ -10,5 +10,5 @@ function switchInfoFactory($filter, $http, $q) {
     return deferred.promise;
 }
 angular
-    .module('myApp')
+    .module('inspinia')
     .factory('switchInfoFactory', switchInfoFactory)

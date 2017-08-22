@@ -1,0 +1,10 @@
+Value HITS (\S+)
+Value MISSES (\S+)
+Value FREE (\S+)
+Value CREATED (\S+)
+Value MAX (\S+)
+
+Start
+  ^Buffer elements:
+  ^\s+${FREE} in free list \S${MAX} max allowed\S
+  ^\s+${HITS} hits, ${MISSES} misses, ${CREATED} created -> Record

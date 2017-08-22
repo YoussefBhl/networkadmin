@@ -1,5 +1,6 @@
 function addBaseCtrl($scope, $http, $rootScope, $uibModalInstance, $timeout) {
 
+    //checking the input ip if the input can be ip(int.int.int.int) or something else
     $scope.checkIp = function (str) {
         res = str.split(".");
         if (res.length != 4) {
@@ -22,6 +23,7 @@ function addBaseCtrl($scope, $http, $rootScope, $uibModalInstance, $timeout) {
             }
         }
     };
+    //verf the passords input are matched
     $scope.verfPassword = function verfPassword(pass1, pass2) {
         if (pass1 == pass2) {
             return true;
@@ -29,13 +31,10 @@ function addBaseCtrl($scope, $http, $rootScope, $uibModalInstance, $timeout) {
             return false;
 
     }
-    $scope.getRadios = function (radios) {
-        for (var i = 0, length = radios.length; i < length; i++) {
-            if (radios[i].checked) {
-                return (radios[i].value);
-            }
-        }
-    };
+    //to add device we need to connect to server and add device to databse
+    //if everything ok we close the window(uibModalInstance)
+    //if there is porb we show errors
+
     $scope.addDevice = function (url, data, braodcast) {
         $http({
                 method: 'POST',

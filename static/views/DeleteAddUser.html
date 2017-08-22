@@ -1,27 +1,62 @@
-<div class="project-list" style="height:100%">
-    <br>
-    <button restrict access="0" type="button" class="btn btn-default btn-sm" ng-click="ok()">
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+
+        <!-- Page wrapper -->
+        <div ng-include="'views/common/topnavbar.html'"></div>
+
+        <!-- Main view  -->
+        <div class="project-list" style="height:100%" style="padding-bottom:15px;">
+            <br>
+            <a restrict access="0" type="button" class="btn btn-default btn-sm" ng-click="ok()">
           <span class="glyphicon glyphicon-plus"></span> Add new User
-        </button>
-         <br><br>
-    <h4>List:</h4>
-    <table class="table table-hover">
-        <tbody>
-            <tr ng-repeat="user in usersList">
-                <td class="project-title">
-                    <h4>//user[1]//</h4>
-                </td>
-                <td class="project-title" ng-switch on="user[3]">
-                  <h4 ng-switch-when="0">
-                        Admin </h4>
-                    <h4 ng-switch-default >User</h4>      
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger btn-sm" ng-click="deleteUser(user[3],user[0])">
+        </a>
+            <br><br>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <h4>Users:</h4>
+                        </th>
+                        <th>
+                            <h4>Type:</h4>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in usersList">
+                        <td class="project-title">
+                            <h4>//user[1]//</h4>
+                        </td>
+                        <td class="project-title" ng-switch on="user[3]">
+                            <h4 ng-switch-when="0">
+                                administrator </h4>
+                            <h4 ng-switch-default>User</h4>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteUser(user[3],user[0])">
                     <span class="glyphicon glyphicon-remove"></span> Remove 
                     </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+
 </div>
+<!-- End wrapper-->

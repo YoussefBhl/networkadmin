@@ -1,4 +1,6 @@
 function settingsCtrl ($scope, $state,$timeout,$http,Auth) {
+    var user = Auth.isLoggedIn();
+    $scope.username = user[1];
     function verfPassword(pass){
         if($scope.password == pass){
             return true;
@@ -25,18 +27,22 @@ function settingsCtrl ($scope, $state,$timeout,$http,Auth) {
                 .then(function (resp) {
                     if (resp.data) {
                         document.getElementById("errorMsgDuplicate").style.display = "block";
+                        document.getElementById("errorMsg").style.display = "none";
                     }
                     else{
+                        document.getElementById("errorMsgDuplicate").style.display = "none";
+                        document.getElementById("errorMsg").style.display = "none";
                         $scope.modTrue = true;
                         $timeout(function () {
-                            $state.go('home.switchs');
-                        }, 1000);
+                            $state.go('switchs.switchsList');
+                    }, 1000);
                     }
                 }, function (error) {
                     alert(error);
                 });
         }
         else{
+            document.getElementById("errorMsgDuplicate").style.display = "none";
             document.getElementById("errorMsg").style.display = "block";
         }
         
@@ -44,5 +50,5 @@ function settingsCtrl ($scope, $state,$timeout,$http,Auth) {
     };
 }
 angular
-    .module('myApp')
+    .module('inspinia')
     .controller('settingsCtrl', settingsCtrl)

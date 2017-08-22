@@ -18,5 +18,5 @@ return{
   }
 }
 angular
-    .module('myApp')
+    .module('inspinia')
     .factory('Auth', Auth)

@@ -14,5 +14,5 @@ function usersFactory($filter, $http, $q,Auth) {
 
 }
 angular
-    .module('myApp')
+    .module('inspinia')
     .factory('usersFactory', usersFactory)

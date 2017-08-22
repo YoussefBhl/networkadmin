@@ -1,5 +1,5 @@
-function confBaseCtrl($scope, $http, $timeout,$state) {
-
+function confBaseCtrl($scope, $http, $timeout, $state) {
+//checking the input ip if the input can be ip(int.int.int.int) or something else
     $scope.checkIp = function (str) {
         res = str.split(".");
         if (res.length != 4) {
@@ -22,6 +22,7 @@ function confBaseCtrl($scope, $http, $timeout,$state) {
             }
         }
     };
+    //verf the passords input are matched
     $scope.verfPassword = function verfPassword(pass1, pass2) {
         if (pass1 == pass2) {
             return true;
@@ -29,13 +30,7 @@ function confBaseCtrl($scope, $http, $timeout,$state) {
             return false;
 
     }
-    $scope.getRadios = function (radios) {
-        for (var i = 0, length = radios.length; i < length; i++) {
-            if (radios[i].checked) {
-                return (radios[i].value);
-            }
-        }
-    };
+    // connect to server if device's conf changed then we back to devices list
     $scope.changeDevice = function (data) {
         $http({
                 method: 'POST',
@@ -50,18 +45,21 @@ function confBaseCtrl($scope, $http, $timeout,$state) {
                     $scope.modTrue = true;
                     document.getElementById("errorMsgDuplicate").style.display = "none";
                     document.getElementById("errorMsg").style.display = "none";
-                    document.getElementById("errorMsgPass").style.display = "none";
                     $timeout(function () {
-                        $state.go('home.switchs');
+                        if (data.tableName == "switchs") {
+                            $state.go('switchs.switchsList');
+                        }
+                        else{
+                            $state.go('devices.devicesList');
+                        }
                     }, 1000);
-                }
-                else{
+                } else {
                     document.getElementById("errorMsg").style.display = "none";
-                    document.getElementById("errorMsgPass").style.display = "none";
                     document.getElementById("errorMsgDuplicate").style.display = "block";
                 }
             }, function (error) {
-                alert(error);
+                document.getElementById("errorMsg").style.display = "none";
+                document.getElementById("errorMsgDuplicate").style.display = "block";
             });
     };
 };

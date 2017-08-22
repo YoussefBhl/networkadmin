@@ -1,4 +1,5 @@
 function listeBaseCtrl($scope,$uibModal,$state,$http) {
+    //if the admin want to add new device we pop up a window   
     $scope.newDevice = function (temp,ctrl) {
     var modalInstance = $uibModal.open({
                     templateUrl: temp,
@@ -7,6 +8,7 @@ function listeBaseCtrl($scope,$uibModal,$state,$http) {
                     windowClass: "animated fadeIn"
                 });
   };
+  //if the user want to show the device detail w cahnge route and send with it the selected device detail
   $scope.goToDeviceURL = function(url,selectedDevice){
     $state.go(url, {
             selectedDeviceID: selectedDevice[0],
@@ -30,5 +32,6 @@ function listeBaseCtrl($scope,$uibModal,$state,$http) {
                     alert(error);
                 });
   };
+       
 };
 

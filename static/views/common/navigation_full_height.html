@@ -1,0 +1,42 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse" full-scroll>
+        <ul side-navigation class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="profile-element" uib-dropdown>
+                    <img alt="image" class="img-circle" src="img/user.png" style="width:48px;height:48px;"/>
+                    <a uib-dropdown-toggle href>
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">//username//</strong>
+                             </span>
+                                <span class="text-muted text-xs block">//perm// <b class="caret"></b></span>
+                            </span>
+                    </a>
+                    <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
+                        <li><a ui-sref="settings">Profile</a></li>
+                        <li  restrict access="0"><a ui-sref="DeleteAddUser">Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a ng-click="logout()">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    GCT
+                </div>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="switchs.switchsList"><i class="fa icon-router"></i> <span class="nav-label">Switchs </span> </a>
+            </li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="devices.devicesList"><i class="fa fa-plug"></i> <span class="nav-label">Devices</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="settings"><i class="fa fa-edit"></i> <span class="nav-label">Profil</span></a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="DeleteAddUser" restrict access="0"><i class="fa fa-wrench"></i> <span class="nav-label">Settings</span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

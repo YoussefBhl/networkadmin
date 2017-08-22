@@ -1,0 +1,20 @@
+database:
+Mysql server.
+database='mydb', user='app', password='ukcuf' (you can change it db_manger.py)
+
+
+server:
+Python 2.7 (Flask)
+libraries:
+(Server)
+flask_restful
+flask.ext.cors
+(database)
+mysql.connector
+(network)
+netmiko
+textfsm
+
+static: (angularjs)
+install npm
+light-server 

@@ -1,0 +1,9 @@
+Value TOTAL (\S+)
+Value HEAD (\S+)
+Value USED (\S+)
+Value FREE (\S+)
+Value LOWEST (\S+)
+Value LARGEST (\S+)
+
+Start
+  ^Processor\s+${HEAD}\s+${TOTAL}\s+${USED}\s+${FREE}\s+${LOWEST}\s+${LARGEST} -> Record

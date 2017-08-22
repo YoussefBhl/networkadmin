@@ -1,0 +1,180 @@
+<h2> //switch[1]//</h2>
+<a type="submit" ng-click="refresh()" class="btn btn-default btn-sm btn-show">Refresh</a>
+<hr>
+<div class="row">
+    <div class="col-lg-9">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Device Tech</h5>
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+                <div ng-if="onload" class="loader"></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="title in techTitle">//title//</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="vlan in tech">
+                            <td style="padding:0;margin:0 auto;" ng-repeat="r in vlan">//r//</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>System info</h5>
+
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+                <div ng-if="onload" class="loader"></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="title in systemTitle">//title//</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr >
+                            <td style="padding:0;margin:0 auto;" ng-repeat="inter in system">//inter//</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>CPU Performance</h5>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+                    <div ng-if="onload" class="loader"></div>
+                    <nvd3 options="optionsCPU" data="dataCPU"></nvd3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-lg-4">
+        <div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>PACKETS (Tot = //packtsTot//)</h5>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+                    <div ng-if="onload" class="loader"></div>
+                    <nvd3 options="optionsPkts" data="dataPkts"></nvd3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Buffers</h5>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+                    <div ng-if="onload" class="loader"></div>
+                    <nvd3 options="optionsBuffers" data="dataBuffers"></nvd3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Memory (Tot = //memTot//)</h5>
+
+                    <div ibox-tools></div>
+                </div>
+                <div class="ibox-content">
+                    <div ng-if="onload" class="loader"></div>
+                    <nvd3 options="optionsMem" data="dataMem"></nvd3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-7">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Connected Vlans</h5>
+
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+                <div ng-if="onload" class="loader"></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="title in vlansTitle">//title//</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="vlan in vlans">
+                            <td style="padding:0;margin:0 auto;" ng-repeat="r in vlan">//r//</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>IP ARP</h5>
+
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+                <div ng-if="onload" class="loader"></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="title in arpTitle">//title//</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="inter in arp">
+                            <td style="padding:0;margin:0 auto;" ng-repeat="r in inter">//r//</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 col-sm-5">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Interfaces Graph</h5>
+
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+
+                <div id="mynetwork">
+                    <div ng-if="onload" class="loader"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

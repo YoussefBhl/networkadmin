@@ -1,11 +1,24 @@
-    <div class="tabbable tabs-left">
-      <ul class="nav nav-tabs">
-         <li ui-sref=".switchs" ng-class="getTabClass(0)" ng-click="goToSwitchs()"><a href="#switchs" data-toggle="tab">Switchs</a></li>
-         <li ui-sref=".camera" ng-class="getTabClass(1)" ng-click="goToCamera()"><a href="#camera" data-toggle="tab">Camera</a></li>
-         <li ui-sref=".settings" ng-class="getTabClass(2)" ng-click="goToSettings()"><a href="#settings" data-toggle="tab">Settings</a></li>
-         <li restrict access="0" ng-click="goAddUser()" ng-class="getTabClass(3)"><a ui-sref=".DeleteAddUser"  href="#settings" data-toggle="tab">Add/delete user</a></li>
-         <li ng-class="getTabClass(4)" ng-click="logout()"><a href="#logout" data-toggle="tab">Logout</a></li>
-      </ul>
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+
+        <!-- Page wrapper -->
+        <div ng-include="'views/common/topnavbar.html'"></div>
+
+        <!-- Main view  -->
+        <div ui-view style="padding-bottom:15px;"></div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
     </div>
-    
-<div ui-view></div> 
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->

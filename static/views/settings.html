@@ -1,16 +1,40 @@
-<h4>User configuration</h4>
-<form name="myform" class="form-signin col-lg-10" style="margin:0 auto;">
-        <label for="username" class="sr-only"></label>username:
-        <input type="text" id="username" class="form-control input-mod" placeholder="//switch[3]//" ng-model="username" required>
-        <label for="password" class="sr-only"></label>password:
-        <input type="password" id="password" class="form-control input-mod" placeholder="//switch[4]//" ng-model="password" required>
-        <label for="password" class="sr-only"></label> Verify password:
-        <input type="password" id="passwordVerif" class="form-control input-mod" placeholder="//switch[4]//" ng-model="passwordVerif" required>
-        <button type="button" class="btn btn-primary" ng-click="ok()">Save</button>
-        <p id="errorMsg" style="display:none; color:red">Password not the same</p>
-        <p id="errorMsgDuplicate" style="display:none; color:red">User exists</p>
-    <p ng-show="modTrue" style="color:green">configuration was modified</p>
-    </form>
-    <div>
-        
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+
+        <!-- Page wrapper -->
+        <div ng-include="'views/common/topnavbar.html'"></div>
+
+        <!-- Main view  -->
+        <div class="container" style="padding-bottom:15px;">
+            <h4>Login configuration</h4>
+            <form name="myform" class="form-signin col-lg-10" style="margin:0 auto;">
+                <div class="form-group"><label>username</label>
+                    <input type="text" class="form-control" ng-model="username" required></div>
+                <div class="form-group"><label>password</label>
+                    <input type="password" id="password" class="form-control" ng-model="password" required></div>
+                <div class="form-group"><label>Verify password:</label>
+                    <input type="password" class="form-control" ng-model="passwordVerif" required></div>
+                <p id="errorMsg" style="display:none; color:red">Password not the same</p>
+                <p id="errorMsgDuplicate" style="display:none; color:red">User exists</p>
+                <p ng-show="modTrue" style="color:green">configuration was modified</p>
+                <button type="submit" class="btn btn-primary" ng-click="myform.$valid && ok()">Save</button>
+
+            </form>
+        </div>
+
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
     </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->

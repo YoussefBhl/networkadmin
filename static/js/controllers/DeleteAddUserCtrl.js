@@ -1,14 +1,15 @@
 function DeleteAddUserCtrl ($scope,usersFactory, $location, $state,$uibModal,$http) {
   $scope.usersList = [];
-  //get switch list 
+  //get user list using the factory
     var handleSuccess = function(data, status) {
         $scope.usersList = data;
     };
     usersFactory.get().success(handleSuccess);
-
+    //if new user added we refresh teh list
     $scope.$on("user Added",function(pevent,padata){
              usersFactory.get().success(handleSuccess);
            })
+    //if the admin want to add new user we pop up a window       
     $scope.ok = function(){
         var modalInstance = $uibModal.open({
                     templateUrl: 'views/addUser.html',
@@ -17,6 +18,7 @@ function DeleteAddUserCtrl ($scope,usersFactory, $location, $state,$uibModal,$ht
                     windowClass: "animated fadeIn"
                 });
     }
+
     $scope.deleteUser = function(role,id){
         $http({
                     method: 'POST',
@@ -40,6 +42,6 @@ function DeleteAddUserCtrl ($scope,usersFactory, $location, $state,$uibModal,$ht
     }
 }
 angular
-    .module('myApp')
+    .module('inspinia')
     .controller('DeleteAddUserCtrl', DeleteAddUserCtrl)
     

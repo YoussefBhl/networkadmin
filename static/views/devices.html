@@ -1,37 +1,43 @@
 <div class="project-list" style="height:100%">
     <br>
-    <button restrict access="0" type="button" class="btn btn-default btn-sm" ng-click="addDevice()">
+    <a restrict access="0" type="button" class="btn btn-default btn-sm" ng-click="addDevice()">
           <span class="glyphicon glyphicon-plus"></span> Add new //device//
-        </button>
+        </a>
+    <a type="button" ng-click="refresh()" class="btn btn-default btn-sm">Refresh</a>
     <br><br>
     <h4>//device//s List:</h4>
     <table class="table table-hover">
         <tbody>
-            <tr ng-repeat="device in devicesList[0]">
-                <td class="project-status" ng-switch on="devicesList[1][$index]">
+            <tr ng-repeat="device in devicesList">
+                <td class="project-status" ng-switch on="devicesStatus[$index]" style="padding:0;margin:0 auto;">
                     <span ng-switch-when="active" class="label label-primary">
-                        //devicesList[1][$index] //</span>
-                    <span ng-switch-default class="label label-danger">//devicesList[1][$index] //</span>
+                        //devicesStatus[$index]//</span>
+                    <div ng-switch-when="onload" class="loader"></div>
+                    <span ng-switch-default class="label label-danger">//devicesStatus[$index]//</span>
                 </td>
-                <td class="project-title" ng-click="goToDeviceDetail(device)">
+                <td class="project-title" ng-click="goToDeviceDetail(device)" style="padding:0;margin:0 auto;">
                     <h5 style="padding:0;margin:0;">//device[1]//</h5>
-                    <br/>
-                    <p>//device[2]//</p>
-                    <div ng-show="show">
-                        <p> Model: //device[5]//</p>
-                        <p restrict access="0"> username: //device[3]//</p>
-                        <p restrict access="0"> password: //device[4]//</p>
+                    <p style="padding:0;margin:0;">//device[2]//</p>
+                    <div ng-show="$index == selected && show">
+                        <div ng-show="isSwitch">
+                        <p ng-show="isSwitch" style="padding:0;margin:0;"> Model: //device[5]//</p>
+                        <p  style="padding:0;margin:0;"> username: //device[3]//</p>
+                        <p style="padding:0;margin:0;"> password: //device[4]//</p>
+                        </div>
+                        <div ng-show="!isSwitch">
+                        <p style="padding:0;margin:0;"> Type: //device[3]//</p>
+                        </div>
                     </div>
                 </td>
-                <td class="project-actions">
-                    <a class="btn btn-white btn-sm btn-show" ng-click="showMore()"><i class="fa fa-folder"></i> //btn// </a>
+                <td class="project-actions" style="padding:0;margin:0 auto;">
+                    <a class="btn btn-white btn-sm btn-show" ng-click="showMore($index)"><i class="fa fa-folder"></i> //btn// </a>
                 </td>
-                <td restrict access="0">
+                <td restrict access="0" style="padding:0;margin:0 auto;">
                     <button type="button" class="btn btn-success btn-sm" ng-click="goToDeviceConf(device)">
                     <span class="glyphicon glyphicon-pencil"></span> Edit 
                     </button>
                 </td>
-                <td restrict access="0">
+                <td restrict access="0" style="padding:0;margin:0 auto;">
                     <button type="button" class="btn btn-danger btn-sm" ng-click="delete(device[0])">
                     <span class="glyphicon glyphicon-remove"></span> Remove 
                     </button>

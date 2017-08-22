@@ -1,3 +1,0 @@
-Port      Name               Status       Vlan       Duplex  Speed Type
-Fa0/1                        connected    1          a-full  a-100 10/100BaseTX
-Fa0/2                        connected    1          a-full  a-100 10/100BaseTX

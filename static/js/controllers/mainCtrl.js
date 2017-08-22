@@ -1,5 +1,10 @@
 function mainCtrl($scope, Auth, $location) {
-
+ $scope.logout = function () {
+    Auth.setUser(null);  
+  };
+  
+  
+//watching if the user is logged in or not
   $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
 
     if (!value && oldValue) {
@@ -7,14 +12,24 @@ function mainCtrl($scope, Auth, $location) {
     }
 
     if (value) {
+      var user = Auth.isLoggedIn();
       $location.path('/home');
+      $scope.username = user[1];
+      var perm = user[3];
+      if(perm == 0){
+        $scope.perm = "administrator";
+      }
+      else{
+        $scope.perm = "User";
+      }
       //Do something when the user is connected
     }
+    
 
   }, true);
 }
 angular
-  .module('myApp')
+  .module('inspinia')
   .controller('mainCtrl', mainCtrl)
   .directive('restrict', function (Auth) {
     return {
@@ -34,8 +49,6 @@ angular
             accessDenied = false;
           }
         }
-
-
         if (accessDenied) {
           element.children().remove();
           element.remove();

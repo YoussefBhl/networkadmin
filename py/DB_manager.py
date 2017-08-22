@@ -1,8 +1,10 @@
 import mysql.connector
 from flask import  jsonify
 from  collect_data import perse_results, try_to_connect
+#connect to mydb
+db = mysql.connector.connect(host='localhost', database='mydb', user='app', password='ukcuf') 
 
-db = mysql.connector.connect(host='localhost', database='mydb', user='app', password='ukcuf')
+#the user login check if the user exists or not
 def db_login(_username,_userPassword):
 	
 	cursor = db.cursor()
@@ -26,20 +28,52 @@ def db_login(_username,_userPassword):
 				return jsonify(data[0])
 			else:
 				return {'status': 100, 'message': 'Authentication failure'}
+#return the devices ' list wich is database 
 def db_deviceList(tableName):
 	cursor = db.cursor()
 	query = "SELECT * FROM {0};".format(tableName)
 	cursor.execute(query)
 	data = cursor.fetchall()
 	cursor.close()
-	final_data = []
-	for switch in data:
-		rslt = try_to_connect(switch[2],switch[3],switch[4]) #var in : Ip username password
-		final_data.append(rslt)
-	return jsonify(data,final_data)
+	return data 
+def db_CameraList(tableName):
+	cursor = db.cursor()
+	query = "SELECT * FROM {0} where Type = 'camera';".format(tableName)
+	cursor.execute(query)
+	data = cursor.fetchall()
+	cursor.close()
+	return data
+def db_routerList(tableName):
+	cursor = db.cursor()
+	query = "SELECT * FROM {0} where Type = 'router';".format(tableName)
+	cursor.execute(query)
+	data = cursor.fetchall()
+	cursor.close()
+	return data
+	
+def db_otherList(tableName):
+	cursor = db.cursor()
+	query = "SELECT * FROM {0} where Type = 'other';".format(tableName)
+	cursor.execute(query)
+	data = cursor.fetchall()
+	cursor.close()
+	return data
+
+#we try to connect to the device (using netmiko) then return the result
+def db_getDeviceStatus(_id,_tableName):
+	thread_db = mysql.connector.connect(host='localhost', database='mydb', user='app', password='ukcuf')
+	cursor = thread_db.cursor()
+	query = "select * from {0} where ID = {1};".format(_tableName,_id)
+	cursor.execute(query)
+	data = cursor.fetchall()
+	cursor.close()
+	thread_db.close()
+	return try_to_connect(data[0][2],data[0][3],data[0][4]) #var in : Ip username password
+
+#return the users list (used to delete user by the admin)
 def db_userList(_id):
 	cursor = db.cursor()
-	query = "select * from superuser where ID <> {0} AND ID <> 0;".format(_id)
+	query = "select * from superuser where ID <> {0} AND ID <> 1;".format(_id)
 	cursor.execute(query)
 	data = cursor.fetchall()
 	cursor.close()
@@ -49,20 +83,35 @@ def db_userList(_id):
 	cursor.close()
 	return jsonify(data)
 
-def db_changeDevice(_tableName,_name,_ip,_username,_password,_model,_id):
+def db_changeDevice(_name,_ip,_type,_id):
 	cursor = db.cursor()
-	query = "UPDATE {0} SET deviceName = '{1}' ,IP = '{2}', username = '{3}', password = '{4}', model = '{5}' where ID = '{6}';".format(_tableName,_name,_ip,_username,_password,_model,_id)
+	query = "UPDATE devices SET deviceName = '{0}' ,IP = '{1}',Type = '{2}' where ID = '{3}';".format(_name,_ip,_type,_id)
 	data = cursor.execute(query)
 	db.commit()
 	cursor.close()
 	return data	
-
-def db_addDevice(_tableName,_name,_ip,_username,_password,_model):
+#change the siwtch configuration
+def db_changeSwitch(_name,_ip,_username,_password,_model,_id):
 	cursor = db.cursor()
-	query = "INSERT INTO {0}(deviceName,IP,username,password,model) VALUES('{1}','{2}','{3}','{4}','{5}');".format(_tableName,_name,_ip,_username,_password,_model)
+	query = "UPDATE switchs SET deviceName = '{0}' ,IP = '{1}', username = '{2}', password = '{3}', model = '{4}' where ID = '{5}';".format(_name,_ip,_username,_password,_model,_id)
 	data = cursor.execute(query)
 	db.commit()
-	#data = cursor.fetchall()
+	cursor.close()
+	return data		
+
+def db_addDevice(_name,_ip,_type):
+	cursor = db.cursor()
+	query = "INSERT INTO devices(deviceName,IP,Type) VALUES('{0}','{1}','{2}');".format(_name,_ip,_type)
+	data = cursor.execute(query)
+	db.commit()
+	cursor.close()
+	return data
+
+def db_addSwitch(_name,_ip,_username,_password,_model):
+	cursor = db.cursor()
+	query = "INSERT INTO switchs(deviceName,IP,username,password,model) VALUES('{0}','{1}','{2}','{3}','{4}');".format(_name,_ip,_username,_password,_model)
+	data = cursor.execute(query)
+	db.commit()
 	cursor.close()
 	return data
 def db_deleteDevice(tableName,_id):
